@@ -24,21 +24,45 @@
 
 // 1 <= intervals.length <= 104
 // intervals[i].length == 2
-// 0 <= starti <= endi <= 104
+
+
 class Solution {
     public int[][] merge(int[][] intervals) {
-        Arrays.sort(intervals,(a,b) -> Integer.compare(a[0],b[0]));
-        List<int[]>result = new ArrayList<>();
-        result.add(intervals[0]);
-        for(int i =1;i<intervals.length;i++){
-            int[] last =result.get(result.size()-1);
-            if(intervals[i][0]<=last[1]){
-                last[1]= Math.max(last[1],intervals[i][1]);
+        Arrays.sort(intervals,(a,b)->Integer.compare(a[0],b[0]));
+        List<int[]> result = new ArrayList<>();
+        int start = intervals[0][0];
+        int end = intervals[0][1];
 
-            }else{
-                result.add(intervals[i]);
+        for(int i =1;i < intervals.length;i++){
+            if(intervals[i][0]<= end){
+                end = Math.max(end, intervals[i][1]);
             }
-        
-        }return result.toArray(new int[result.size()][]);
+            else {
+                result.add(new int[]{start,end});
+                start = intervals[i][0];
+                end = intervals[i][1];
+            }
+            
+        }
+        result.add(new int[]{start,end});
+        return result.toArray(new int[result.size()][]);
     }
 }
+// // 0 <= starti <= endi <= 104
+// class Solution {
+//     public int[][] merge(int[][] intervals) {
+//         Arrays.sort(intervals,(a,b) -> Integer.compare(a[0],b[0]));
+//         List<int[]>result = new ArrayList<>();
+//         result.add(intervals[0]);
+//         for(int i =1;i<intervals.length;i++){
+//             int[] last =result.get(result.size()-1);
+//             if(intervals[i][0]<=last[1]){
+//                 last[1]= Math.max(last[1],intervals[i][1]);
+
+//             }else{
+//                 result.add(intervals[i]);
+//             }
+        
+//         }return result.toArray(new int[result.size()][]);
+//     }
+// }

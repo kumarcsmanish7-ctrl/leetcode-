@@ -47,3 +47,12 @@ class Solution {
         }
     }
 }
+
+90° anticlockwise
+Step 1: Transpose the matrix
+✅ Step 2: Reverse each column
+
+180° rotation = reverse both rows and columns
+Step 1: Reverse all rows (top ↔ bottom)
+Step 2: Reverse each row (left ↔ right) 
+
